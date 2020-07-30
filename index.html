@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,14 +44,12 @@
       for (var i = 0; i < jsonData.length; i++) {
         var obj = jsonData[i];
         var title = obj.loss_probability;
-        var icon_url = 'green.png';
+        var icon_url = 'red.png';
 
         if (parseFloat(obj.loss_probability) <= 20) {
-          iconUrl = 'green.png';
+          icon_url = 'green.png';
         } else if (parseFloat(obj.loss_probability) >= 21 && parseFloat(obj.loss_probability) <= 70) {
           icon_url = 'yellow.png';
-        } else {
-          iconUrl = 'red.png';
         }
 
         var myIcon = DG.icon({
