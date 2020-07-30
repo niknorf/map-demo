@@ -8,47 +8,80 @@
     <!-- <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script> -->
 
     <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"
+    />
     <script src="https://maps.api.2gis.ru/2.0/cluster_realworld.js"></script>
-    <script type="text/javascript" language="javascript" src="data_map.json"></script>
+    <script
+      type="text/javascript"
+      language="javascript"
+      src="data_map.json"
+    ></script>
     <link rel="stylesheet" href="css/style.css" />
-
   </head>
   <body>
     <div class="content">
       <div id="map"></div>
       <div class="description">
-        <h2>Map Cluster Demo</h2>
+        <h2 class="title">Карта с кластерами</h2>
+        <p class="version">v0.0.1</p>
       </div>
     </div>
 
     <script type="text/javascript">
-    DG.then(function() {
-                    // загрузка кода модуля
-                    return DG.plugin('https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js');
-                }).then(function() {
-                    map = DG.map('map', {
-                        center: DG.latLng(60.08, 30.33),
-                        zoom: 15
-                    });
+      DG.then(function() {
+        // загрузка кода модуля
+        return DG.plugin(
+          "https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"
+        );
+      }).then(function() {
+        map = DG.map("map", {
+          center: DG.latLng(60.08, 30.33),
+          zoom: 15
+        });
 
-                    var markers = DG.markerClusterGroup();
-console.log(jsonData);
-                    // обработка координат для установки маркеров
-                    for (var i = 0; i < jsonData.length; i++) {
-                        var obj = jsonData[i];
-                        var title = obj.loss_probability;
-                        var marker = DG.marker([obj.lat, obj.lon], { title: title });
-                        var popupTxt = "Адрес" + ": " + obj.address + '<br />' + 'Вероятность нетехнических потерь (%)' + ': '
-                        + obj.loss_probability + '<br />' + 'Период прогнозирования' + ': ' + obj.date_period
-                        + '<br />' + 'Признак (БУ/БД)' + ': ' + obj.type + '<br />' + 'Коментарии' + ': ' + obj.comments;
-                        marker.bindPopup(popupTxt);
-                        markers.addLayer(marker);
-                    }
+        var markers = DG.markerClusterGroup();
+        console.log(jsonData);
+        // обработка координат для установки маркеров
+        for (var i = 0; i < jsonData.length; i++) {
+          var obj = jsonData[i];
+          var title = obj.loss_probability;
+          var marker = DG.marker([obj.lat, obj.lon], { title: title });
+          var popupTxt =
+            "Адрес" +
+            ": " +
+            obj.address +
+            "<br />" +
+            "Вероятность нетехнических потерь (%)" +
+            ": " +
+            obj.loss_probability +
+            "<br />" +
+            "Период прогнозирования" +
+            ": " +
+            obj.date_period +
+            "<br />" +
+            "Признак (БУ/БД)" +
+            ": " +
+            obj.type +
+            "<br />" +
+            "Коментарии" +
+            ": " +
+            obj.comments;
+          marker.bindPopup(popupTxt);
+          markers.addLayer(marker);
+        }
 
-                    map.addLayer(markers);
-                });
+        map.addLayer(markers);
+      });
     </script>
   </body>
 </html>
