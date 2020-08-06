@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Map Demo</title>
   <!-- <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
@@ -14,6 +15,11 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
   <script src="https://maps.api.2gis.ru/2.0/cluster_realworld.js"></script>
   <script type="text/javascript" language="javascript" src="data_map.json"></script>
+  <script type="text/javascript" language="javascript" src="powerline.geojson"></script>
+  <!-- <script type="text/javascript" language="javascript" src="power-point.geojson"></script> -->
+  <script type="text/javascript" language="javascript" src="building-polygon.geojson"></script>
+
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
@@ -70,6 +76,13 @@
       }
 
       map.addLayer(markers);
+      //Add power lines to the map
+      DG.geoJson(power_line).addTo(map);
+      //Add the building poligons to the maps
+      DG.geoJson(building_polygon).addTo(map);
+      //Add the current location sign to the map
+      DG.control.location({position: 'bottomright'}).addTo(map);
+
     });
   </script>
 </body>
